@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ktjiaoyu.demo.mapper.SysUserMapper">
+
+    <!--&lt;!&ndash; 通用查询映射结果 &ndash;&gt;-->
+    <!--<resultMap id="BaseResultMap" type="com.ktjiaoyu.demo.pojo.SysUser">-->
+        <!--<id column="usr_id" property="usrId" />-->
+        <!--<result column="usr_name" property="usrName" />-->
+        <!--<result column="usr_password" property="usrPassword" />-->
+        <!--<result column="usr_role_id" property="usrRoleId" />-->
+        <!--<result column="usr_flag" property="usrFlag" />-->
+    <!--</resultMap>-->
+
+    <!-- 通用查询结果列 -->
+    <!--<sql id="Base_Column_List">-->
+        <!--usr_id, usr_name, usr_password, usr_role_id, usr_flag,role_name-->
+    <!--</sql>-->
+
+    <select id="seleRoleName" resultType="sysuser" parameterType="string">
+          select u.*,r.role_name from sys_user u,sys_role r where u.usr_role_id=r.role_id
+          and u.usr_name=#{usrName} and u.usr_password=#{usrPassword}
+    </select>
+
+    <!--<select id="selePage" resultType="map">-->
+          <!--select u.*,r.role_name from sys_user u,sys_role r where 1=1-->
+          <!--<if test="usrName!=null and usrName!=''"> usr_name like concat ('%',usrName,'%')</if>-->
+          <!--<if test="usrRoleId!=null and usrRoleId='-1'"> and u.usr_role_id=#{usrRoleId}</if>-->
+           <!--u.usr_role_id=r.role_id-->
+           <!--order by usrId desc limit #{pageIndex},#{pageIndex}-->
+    <!--</select>-->
+
+    <resultMap id="listss" type="sysuser">
+        <result property="roleName" column="role_name"></result>
+    </resultMap>
+
+    <select id="list"  parameterType="sysuser" resultMap="listss">
+        SELECT u.*,r.role_name FROM sys_user u,sys_role r
+        where u.usr_role_id=r.role_id
+        <if test="usrName!=null and usrName!=''">AND u.usr_name LIKE  concat('%',#{usrName},'%')</if>
+        <if test="usrRoleId!=null and usrRoleId!=0">AND usr_role_id=#{usrRoleId}</if>
+        order by u.usr_id desc limit #{pageIndex},#{pageSize}
+    </select>
+
+    <select id="count" parameterType="sysuser" resultType="int">
+        SELECT count(1) FROM sys_user u,sys_role r
+        where u.usr_role_id=r.role_id
+        <if test="usrName!=null and usrName!=''">AND u.usr_name LIKE  concat('%',#{usrName},'%')</if>
+        <if test="usrRoleId!=null and usrRoleId!=0">AND usr_role_id=#{usrRoleId}</if>
+    </select>
+
+
+    <select id="findUserByUsrName" parameterType="string" resultType="sysuser">
+        select u.*,r.role_name from sys_user u,sys_role r where u.usr_role_id=r.role_id
+          and u.usr_name=#{userName}
+    </select>
+</mapper>

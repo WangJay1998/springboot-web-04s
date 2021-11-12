@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ktjiaoyu.demo.mapper.SysRightMapper">
+          <select id="findRightsByRoles" resultType="sysright" parameterType="string">
+              SELECT t.*,e.role_name  FROM sys_right t,sys_role e,sys_role_right a WHERE
+    a.rf_role_id=e.role_id AND a.rf_right_code=t.right_code AND e.role_name=#{roleName}
+          </select>
+</mapper>

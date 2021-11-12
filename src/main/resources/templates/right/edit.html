@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="main"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <title>菜单管理修改</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>修改用户信息 <i class="fa fa-user"></i></h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="clearfix"></div>
+                        <form class="form-horizontal form-label-left" th:action="@{/right/up}" action="/right/up" method="post">
+                            <!--<input type="text" name="usrId" id="usrId" value="1" th:value="${user.usrId}">-->
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usrName"> 菜单编号 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="usrName" class="form-control col-md-7 col-xs-12" th:value="${right.rightCode}"
+                                           data-validate-length-range="10" data-validate-words="1" name="rightCode" required="required"
+                                           placeholder="请输入菜单编号" type="text">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usrPassword"> 父菜单编号 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="rightParentCode" class="form-control col-md-7 col-xs-12" th:value="${right.rightParentCode}"
+                                           data-validate-length-range="10" data-validate-words="1" name="rightParentCode" required="required"
+                                           placeholder="请输入父菜单编号" type="text">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rightType"> 菜单类型 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="rightType" class="form-control col-md-7 col-xs-12" th:value="${right.rightType}"
+                                           data-validate-length-range="10" data-validate-words="1" name="rightType" required="required"
+                                           placeholder="请输入菜单类型" type="text">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rightText"> 菜单名称 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="rightText" class="form-control col-md-7 col-xs-12" th:value="${right.rightText}"
+                                           data-validate-length-range="10" data-validate-words="1" name="rightText" required="required"
+                                           placeholder="请输入菜单名称" type="text">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rightUrl"> 菜单URL <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="rightUrl" class="form-control col-md-7 col-xs-12" th:value="${right.rightUrl}"
+                                           data-validate-length-range="10" data-validate-words="1" name="rightUrl" required="required"
+                                           placeholder="请输入菜单URL" type="text">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rightTip"> 菜单描述 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="rightTip" class="form-control col-md-7 col-xs-12" th:value="${right.rightTip}"
+                                           data-validate-length-range="10" data-validate-words="1" name="rightTip" required="required"
+                                           placeholder="请输入菜单描述" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <button id="send" type="submit" class="btn btn-success">保存</button>
+                                    <button type="button" class="btn btn-primary" id="back">返回</button>
+                                    <br/><br/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script layout:fragment="js">
+    $(document).ready(function(){
+        $("#back").on("click",function(){
+            window.history.back();
+        });
+    });
+</script>
+</html>
